@@ -1,0 +1,28 @@
+<h2>{{title}}</h2>
+<a routerLink="/dashboard">Dashboard</a>
+<br/><br/>
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  Enter min number: <input type="text" name="min" placeholder="Larger than" req$
+  <br/>
+  Enter max number: <input type="text" name="max" placeholder="But not larger t$
+  <br/><br/>
+  <button type="submit" [disabled]="!myForm.form.valid">Find Prime</button>
+</form>
+
+<!--don't hide when submitted (button click)-->
+<div id="primeResult" [hidden]="!submitted">
+
+<!--hide result if need to showStatus (status not OK)-->
+<div [hidden]="showStatus">
+        <form #primeResultForm="ngForm" (ngSubmit)="onNextSubmit()" role="form">
+                <h4> {{result}}
+                        <button type="submit">next</button>
+                </h4>
+        </form>
+</div>
+
+<!--don't hide on showStatus-->
+<div [hidden]="!showStatus">
+        <h4 style="color: red;"> {{result}} </h4>
+</div>
+</div>
