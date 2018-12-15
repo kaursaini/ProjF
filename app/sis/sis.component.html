@@ -1,0 +1,45 @@
+<h2>{{title}}</h2>
+<a routerLink="/dashboard">Dashboard</a>
+<br/><br/>
+<form (ngSubmit)="onSubmit()" #myForm="ngForm">
+  Enter prefix: <input type="text" name="prefix" placeholder="Name prefix..." [$
+  <br/>
+  Enter min GPA: <input type="text" name="minGpa" placeholder="Minimun GPA" [(n$
+  <br/>
+  <div class="input-group">
+                <select [(ngModel)]="sortBy" name="sortBy"><option
+                selected="any" value="NONE">Select One:</option>
+                <option value="SURNAME">Last Name</option>
+                <option value="MAJOR">Major</option>
+                <option value="COURSES">Number of Courses</option>
+                <option value="GPA">GPA</option></select>
+        </div>
+        <br/>
+  <button type="submit" [disabled]="!myForm.form.valid">Generate Report</button>
+</form>
+
+<div [hidden]="!submitted">
+<hr/>
+
+<div *ngIf="showStatus; then yes else no"></div>
+<ng-template #yes>
+  <span style="color:red">Error = {{error}}</span>
+</ng-template>
+<ng-template #no>
+<p><i>Sorted by {{sortBy}}</i></p>
+  <table style="margin: auto;" border="1">
+    <tr>
+      <th>Name</th>
+      <th>Major</th>
+      <th>Courses</th>
+      <th>GPA</th>
+    </tr>
+    <tr *ngFor="let e of result">
+      <td>{{e.name}}</td>
+      <td>{{e.major}}</td>
+      <td>{{e.courses}}</td>
+      <td>{{e.gpa}}</td>
+    </tr>
+  </table>
+</ng-template>
+</div>
